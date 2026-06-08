@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Alina 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", cursive;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9a9e, #fecfef, #fad0c4);
+  background-size: 300% 300%;
+  animation: bg 8s ease infinite;
+  color: white;
+}
+
+@keyframes bg {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* slides */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  padding: 30px;
+}
+
+.active {
+  opacity: 1;
+}
+
+/* text */
+h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 15px white;
+}
+
+p {
+  max-width: 700px;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+/* stickers floating */
+.sticker {
+  position: absolute;
+  font-size: 30px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh) rotate(0deg); opacity: 0;}
+  50% {opacity: 1;}
+  100% {transform: translateY(-10vh) rotate(360deg); opacity: 0;}
+}
+
+/* buttons */
+.btn {
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+  box-shadow: 0 0 20px #ff4d6d;
+}
+
+.no {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SLIDES -->
+
+<div class="slide active">
+  <h1>For Alina 💖</h1>
+  <p>You are my favorite thought… every single day.</p>
+</div>
+
+<div class="slide">
+  <h1>✨ Your Beauty ✨</h1>
+  <p>
+    Alina, your smile is like soft sunlight on a cold morning.<br>
+    It makes everything feel okay instantly.
+  </p>
+</div>
+
+<div class="slide">
+  <h1>💞 My Feelings</h1>
+  <p>
+    I don't just like you…<br>
+    I feel peace when I think about you,<br>
+    and happiness when I talk to you.
+  </p>
+</div>
+
+<div class="slide">
+  <h1>🌸 Special Moments</h1>
+  <p>
+    Every moment with you, even small ones,<br>
+    becomes my favorite memory.
+  </p>
+</div>
+
+<!-- FINAL SLIDE -->
+<div class="slide">
+  <h1>💖 One Last Question</h1>
+  <p>Will you be mine for the rest of my life, Alina?</p>
+
+  <button class="btn yes" onclick="yes()">Yes 💖</button>
+  <button class="btn no" id="noBtn">No 💔</button>
+</div>
+
+<script>
+let index = 0;
+const slides = document.querySelectorAll(".slide");
+
+/* slide change */
+setInterval(() => {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+}, 4000);
+
+/* floating stickers */
+const emojis = ["💖","🌸","✨","💕","🧸","🎀"];
+
+function createSticker() {
+  const s = document.createElement("div");
+  s.className = "sticker";
+  s.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+  s.style.left = Math.random() * window.innerWidth + "px";
+  s.style.fontSize = (20 + Math.random() * 25) + "px";
+  s.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(s);
+
+  setTimeout(() => s.remove(), 6000);
+}
+setInterval(createSticker, 300);
+
+/* moving NO button */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+});
+
+/* YES screen */
+function yes() {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      background: linear-gradient(135deg, #ff4d6d, #ffb6c1);
+      color:white;
+      text-align:center;
+      font-family:Comic Sans MS;
+    ">
+      <h1 style="font-size:3rem;">She said YES 💖</h1>
+      <p style="font-size:20px;">Alina, you made my world magical ✨</p>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
